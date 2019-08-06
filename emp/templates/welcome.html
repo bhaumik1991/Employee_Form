@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    {% if employees %}
+        <table style="margin: 20px">
+        <thead>
+            <tr>
+                <th>Full Name</th>
+                <th>Email ID</th>
+                <th>Profile Picture</th>
+                <th>Gender</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in employees %}
+                <tr>
+                    <td>{{ i.full_name }}</td>
+                    <td>{{ i.email }}</td>
+                    <td><img src="{{ i.image.url }}" width="150px"></td>
+                    <td>{{ i.gender }}</td>
+                    <td>{{ i.status }}</td>
+                    <td>
+                        <form method="post" action="{% url 'profile' i.pk %}">
+                            {% csrf_token %}
+                            <button type="submit">Delete</button>
+                        </form>
+			        </td>
+                </tr>
+
+            {% endfor %}
+        </tbody>
+        </table>
+    {% endif %}
+</body>
+</html>
