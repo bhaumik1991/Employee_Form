@@ -10,31 +10,31 @@
         <thead>
             <tr>
                 <th>Full Name</th>
-                <th>Email ID</th>
-                <th>Profile Picture</th>
                 <th>Gender</th>
-                <th>Status</th>
+                <th>Salary</th>
+                <th>Occupation</th>
             </tr>
         </thead>
         <tbody>
             {% for i in employees %}
                 <tr>
                     <td>{{ i.full_name }}</td>
-                    <td>{{ i.email }}</td>
-                    <td><img src="{{ i.image.url }}" width="150px"></td>
                     <td>{{ i.gender }}</td>
-                    <td>{{ i.status }}</td>
+                    <td>{{ i.salary }}</td>
+                    <td>{{ i.occupation }}</td>
                     <td>
                         <form method="post" action="{% url 'profile' i.pk %}">
                             {% csrf_token %}
                             <button type="submit">Delete</button>
                         </form>
 			        </td>
+                    <td><a href="{% url 'employee-update' i.id %}">Edit</a></td>
                 </tr>
 
             {% endfor %}
         </tbody>
         </table>
     {% endif %}
+    <a href="{% url 'employee_form' %}">Add Employees</a>
 </body>
 </html>
